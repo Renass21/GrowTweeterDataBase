@@ -1,0 +1,38 @@
+create table usuario (
+id SERIAL primary key,
+nome VARCHAR(50),
+email VARCHAR(50),
+username VARCHAR(50),
+senha VARCHAR(50)
+)
+
+create table tweet ( 
+id SERIAL primary key,
+id_usuario INT,
+tipoTweet INT,
+conteudo VARCHAR(140),
+foreign key (id_usuario) references usuario(id)
+)
+
+create table retweet (
+id_tweet INT, 
+id_usuario INT,
+foreign key (id_usuario) references usuario(id),
+foreign key (id_tweet) references tweet(id)
+)
+
+create table likes (
+id SERIAL primary key, 
+id_usuario INT, 
+id_tweet INT,
+foreign key (id_usuario) references usuario(id),
+foreign key (id_tweet) references tweet(id)
+)
+
+create table seguidor (
+ id_seguidor SERIAL primary key,
+ id_usuario_seguidor INT,
+ id_usuario_seguido INT,
+ foreign key (id_usuario_seguidor) references usuario(id),
+ foreign key (id_usuario_seguido) references usuario(id)
+ )
